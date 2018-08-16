@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.ssm.dao.ICustomerDao">
+ <insert id="saveCustomer" parameterType="com.briup.ssm.common.bean.Customer">
+    <selectKey keyColumn="id" keyProperty="id" order="BEFORE" resultType="long">
+     select shop_seq.nextval from dual
+    </selectKey>
+    insert into customer values(#{id},#{name},#{password},#{zip},#{address},#{telephone},#{email})
+  </insert>
+  <select id="findByName" parameterType="String" resultType="com.briup.ssm.common.bean.Customer">
+   select * from customer where name=#{name}
+  </select>
+  <select id="findByNameAndPassword" resultType="com.briup.ssm.common.bean.Customer">
+   select * from customer where name=#{param1} and password=#{param2}
+  </select>
+  <select id="updateCustomer" parameterType="com.briup.ssm.common.bean.Customer">
+    update customer set name=#{name},password=#{password},zip=#{zip},address=#{address},telephone=#{telephone},
+    email=#{email} where name=#{name}
+  </select>
+  
+<resultMap type="com.briup.ssm.common.bean.Book" id="BookResult">
+  <id column="id" property="id"/>
+  <result column="name" property="name"/>
+   <result column="price" property="price"/>
+  </resultMap>
+  
+<resultMap type="com.briup.ssm.common.bean.Line" id="LineResult">
+ <id column="id" property="id"/>
+ <result column="num" property="num"/>
+ <association property="order" resultMap="OrderResult"></association>
+ <association property="book" resultMap="BookResult"></association>
+</resultMap>
+
+<resultMap type="com.briup.ssm.common.bean.Order" id="OrderResult">
+ <id column="id" property="id"/>
+ <result column="cost" property="cost"/>
+ <result column="order_date" property="orderDate"/>
+ <result column="payway" property="payway"></result>
+ <association property="customer" resultMap="CustomerResult"></association>
+ <collection property="lines" resultMap="LineResult"></collection>
+</resultMap>
+
+<resultMap type="com.briup.ssm.common.bean.Customer" id="CustomerResult">
+ <id column="cid" property="id"/>
+ <result column="name" property="name"/>
+ <result column="password" property="password"/>
+ <result column="zip" property="zip"/>
+ <result column="address" property="address"/> 
+ <result column="telephone" property="telephone"/>
+ <result column="email" property="email"/>
+<collection property="orders" resultMap="OrderResult"></collection>
+
+ </resultMap>
+ <select id="findBycustomerId" parameterType="long" resultMap="CustomerResult">
+   select c.id as cid,o.id,cost,order_date,name,password,address,zip,telephone,email,payway from customer c,orderform o where o.customer_id=c.id and c.id=#{id} 
+ </select>
+</mapper>			

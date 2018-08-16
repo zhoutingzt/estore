@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.ssm.dao.IOrderDao">
+ <insert id="saveOrder" parameterType="com.briup.ssm.common.bean.Order">
+    <selectKey keyColumn="id" keyProperty="id" resultType="long" order="BEFORE">
+     select shop_seq.nextval from dual
+    </selectKey>
+    insert into orderform values(#{id},#{cost},#{orderDate},#{customer.id},#{payway})
+ </insert>
+<resultMap type="com.briup.ssm.common.bean.Book" id="BookResult">
+  <id column="bid" property="id"></id>
+  <result column="name" property="name"></result>
+  <result column="price" property="price"></result>
+</resultMap>
+<resultMap type="com.briup.ssm.common.bean.Line" id="LineResult">
+  <id column="lid" property="id"></id>
+  <result column="num" property="num"></result>
+  <association property="book" resultMap="BookResult"></association>
+  <association property="order" resultMap="OrderResult"></association>
+</resultMap>
+
+<!-- <resultMap type="com.briup.ssm.common.bean.Order" id="OrderResult">
+ <id column="oid" property="id"></id>
+ <result column="cost" property="cost"></result>
+ <result column="order_date" property="orderDate"></result>
+ <result column="payway" property="payway"></result>
+ <collection property="lines" resultMap="LineResult"></collection>
+ <association property="customer" resultMap="CustomerMap"></association>
+</resultMap> -->
+
+<resultMap type="com.briup.ssm.common.bean.Order" id="OrderResult">
+ <id column="oid" property="id"/>
+ <result column="cost" property="cost"/>
+ <result column="order_date" property="orderDate"/>
+ <result column="payway" property="payway"></result>
+ <association property="customer" resultMap="CustomerResult"></association>
+ <collection property="lines" resultMap="LineResult"></collection>
+</resultMap>
+
+<resultMap type="com.briup.ssm.common.bean.Customer" id="CustomerResult">
+ <id column="cid" property="id"></id>
+ <result column="cname" property="name"></result>
+ <result column="password" property="password"></result>
+ <result column="zip" property="zip"></result>
+ <result column="address" property="address"></result>
+ <result column="telephone" property="telephone"></result>
+ <result column="email" property="email"></result>
+ <collection property="orders" resultMap="OrderResult"></collection>
+</resultMap>
+
+<!-- 根据order的id来查询订单全部信息 -->
+  <select id="selOrderById" parameterType="long" resultMap="OrderResult">
+   <!-- select c.id as cid,o.id,b.id,b.name,cost,price,num from customer c,orderform o,orderline l,book b where
+   c.id=o.customer_id and o.id=l.order_id and l.book_id=b.id and o.id=#{id} -->
+   select c.id as cid,o.id as oid,b.id as bid,l.id as lid,c.name as cname,b.name,cost,price,num,payway from customer c,orderform o,orderline l,book b where
+   c.id=o.customer_id and o.id=l.order_id and l.book_id=b.id and o.id=#{id}
+  </select>
+  
+  <!-- 根据订单id来删除订单 -->
+  <delete id="deleteOrder" parameterType="com.briup.ssm.common.bean.Order">
+    delete from orderform where id=#{id}
+  </delete>
+  
+  <select id="selectOrderById" resultType="com.briup.ssm.common.bean.Order" parameterType="long">
+   select * from orderform where id=#{id}
+  </select>
+</mapper>

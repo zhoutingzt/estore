@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.ssm.dao.ILineDao">
+  <insert id="saveLine" parameterType="com.briup.ssm.common.bean.Line">
+  <selectKey keyColumn="id" keyProperty="id" order="BEFORE" resultType="long">
+   select shop_seq.nextval from dual
+  </selectKey>
+  insert into orderline values(#{id},#{num},#{order.id},#{book.id})
+  </insert>
+  
+  <resultMap type="com.briup.ssm.common.bean.Book" id="BookResult">
+  <id column="id" property="id"></id>
+  <result column="name" property="name"></result>
+  <result column="price" property="price"></result>
+  </resultMap>
+  
+  <resultMap type="com.briup.ssm.common.bean.Line" id="LineResult">
+  <id column="lid" property="id"></id>
+  <result column="num" property="id"></result>
+  <association property="order" resultMap="OrderResult"></association>
+  <association property="book" resultMap="BookResult"></association>
+  </resultMap>
+  
+  <resultMap type="com.briup.ssm.common.bean.Order" id="OrderResult">
+  <id column="oid" property="id"></id>
+  <result column="cost" property="cost"></result>
+  <result column="order_date" property="orderDate"></result>
+  <result column="payway" property="payway"></result>
+  <association property="customer" resultMap="CustomerResult"></association>
+  <collection property="lines" resultMap="LineResult"></collection>
+  </resultMap>
+  
+ <resultMap type="com.briup.ssm.common.bean.Customer" id="CustomerResult">
+ <id column="cid" property="id"></id>
+ <result column="cname" property="name"></result>
+ <result column="password" property="password"></result>
+ <result column="zip" property="zip"></result>
+ <result column="address" property="address"></result>
+ <result column="telephone" property="telephone"></result>
+ <result column="email" property="email"></result>
+ <collection property="orders" resultMap="OrderResult"></collection>
+</resultMap>
+
+<delete id="deleteLine" parameterType="long">
+    delete from orderline where order_id=#{id}
+  </delete>
+  
+  <select id="selectbyOrderId" parameterType="long" resultType="com.briup.ssm.common.bean.Line">
+    select * from orderline where order_id=#{id}
+  </select>
+</mapper>

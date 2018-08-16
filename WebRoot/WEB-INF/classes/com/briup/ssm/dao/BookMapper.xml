@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.ssm.dao.IBookDao">
+  <select id="queryBookIntoPage" resultType="com.briup.ssm.common.bean.Book">
+   SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM book) A WHERE ROWNUM <![CDATA[<=]]> #{param1} ) WHERE RN <![CDATA[> ]]>#{param2}
+  </select>
+ <select id="getTotalCount" resultType="int">
+  select count(*) from book
+ </select>
+ 
+ <select id="queryBookById" parameterType="long" resultType="com.briup.ssm.common.bean.Book">
+   select * from book where id=#{id}
+ </select>
+ 
+ <!-- jar -->
+ <select id="queryAll" resultType="com.briup.ssm.common.bean.Book">
+  select * from book
+ </select>
+ 
+ <resultMap type="com.briup.ssm.common.bean.Book" id="BookResult">
+  <id column="id" property="id"></id>
+  <result column="name" property="name"></result>
+  <result column="price" property="price"></result>
+  </resultMap>
+  
+  <select id="findBook_bywhere" parameterType="map" resultMap="BookResult">
+   select * from book
+  <where>
+   <if test="name!=null">
+     name like #{name}
+   </if>
+  <!--  <if test="author!=null">
+     author like #{author}
+   </if> -->
+   <if test="lowprice!=null">
+    or price <![CDATA[>]]> #{lowprice}
+   </if>
+   <if test="highprice!=null">
+    and price <![CDATA[<]]> #{highprice}
+   </if>
+  </where>
+  
+  </select>
+</mapper>
