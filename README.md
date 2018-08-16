@@ -5,6 +5,7 @@
 1.1.1.1注册
 
  	在register.jsp页面注册一个新用户，用户名作为以后登陆唯一标识。当注册成功的话，跳转到login.jsp页面
+	
 详细描述:
 
 1．需要判断注册的用户名是否已经在数据库中存在。
@@ -101,6 +102,7 @@
 在shopcar.jsp页面上修改图书数量并点击保存修改按钮后可以修改指定一个line的信息。
 
 具体步骤：
+
     1) 创建EditOrderlineServlet.java
          
     2) 在该Servlet中先从Session中获得ShoppingCart对象，然后获得从shopcar.jsp传递过来的lineid(bookid)和num，最后根据lineid来获得指定的Orderline对象，并且修改数量为num。
@@ -115,11 +117,12 @@
 在shopcar.jsp页面中点击清空购物车后可以删除购物车中所有的line。
 
 具体步骤：
-1) 创建ClearCartServlet.java
 
-2) 在该Servlet中获得ShoppingCart对象，然后调用其中的clear()方法来清空购物车。
+  1) 创建ClearCartServlet.java
 
-3) 清空购物车成功后跳转到index.jsp页面
+  2) 在该Servlet中获得ShoppingCart对象，然后调用其中的clear()方法来清空购物车。
+
+  3) 清空购物车成功后跳转到index.jsp页面
 
  效果图如下：
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/ordernull.png)
@@ -169,6 +172,7 @@
 	3) 创建OrderinfoServlet.java
 	
         4) 在该Servlet中获得从Orderlist.jsp传递过来的orderid，然后根据该orderid，调用IOrderService接口中的findById()方法查询指定的订单。
+       
         5) 查询成功后跳转到orderinfo.jsp，在该页面上显示该订单的所有明细信息。
 效果图如下：
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/orderinfo.png)      
@@ -177,6 +181,7 @@
 在listOrder.jsp页面上点击删除按钮可以删除指定的一个用户订单。
 
 具体步骤：
+     
         1) 实现OrderDao接口中的deleteOrder()方法
 
 	2) 实现IOrderService接口中的业务接口方法deleteOrder()
@@ -191,17 +196,17 @@
 
  效果图如下：
  
-      ![image](https://github.com/zhoutingzt/estore/blob/master/images/selectbyname.png)
+   ![image](https://github.com/zhoutingzt/estore/blob/master/images/selectbyname.png)
       
  效果图如下：
  
-      ![image](https://github.com/zhoutingzt/estore/blob/master/images/select1.png)
+   ![image](https://github.com/zhoutingzt/estore/blob/master/images/select1.png)
       
  6.支付界面
  
   效果图如下：
   
-      ![image](https://github.com/zhoutingzt/estore/blob/master/images/pay.png)
+   ![image](https://github.com/zhoutingzt/estore/blob/master/images/pay.png)
   效果图如下：
   
-      ![image](https://github.com/zhoutingzt/estore/blob/master/images/pay2.png)
+   ![image](https://github.com/zhoutingzt/estore/blob/master/images/pay2.png)
