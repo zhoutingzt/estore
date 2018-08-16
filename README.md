@@ -21,10 +21,13 @@
 
 效果图如下：
 
-      图1
-      ![image](https://github.com/zhoutingzt/estore/blob/master/images/register.png)
+      图1:
+      
+ ![image](https://github.com/zhoutingzt/estore/blob/master/images/register.png)
+      
       图2
-      ![image](https://github.com/zhoutingzt/estore/blob/master/images/register1.png)
+     
+ ![image](https://github.com/zhoutingzt/estore/blob/master/images/register1.png)
       
 1.1.1.2登陆
 
@@ -42,9 +45,9 @@
 
  2．实现ICustomerService接口中的业务逻辑login()方法
  
-3．创建LoginServlet.java，在该Servlet中调用ICustomerService接口中的login()方法进行登陆。
+ 3．创建LoginServlet.java，在该Servlet中调用ICustomerService接口中的login()方法进行登陆。
 
-4. 从application中取出所有的Book在index.jsp中显示
+ 4. 从application中取出所有的Book在index.jsp中显示
 
       效果图如下：
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/login.png)
