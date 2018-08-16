@@ -5,27 +5,34 @@
  	在register.jsp页面注册一个新用户，用户名作为以后登陆唯一标识。当注册成功的话，跳转到login.jsp页面
 详细描述:
 1．需要判断注册的用户名是否已经在数据库中存在。
+
 2．最后将注册信息保存到Customer表
 
-具体步骤：1. 实现CustomerDao接口中的saveCustomer()方法
+具体步骤：
+1. 实现CustomerDao接口中的saveCustomer()方法
+
 2．实现ICustomerService接口中的业务逻辑register()方法
+
 3．创建RegisterServlet.java，在该Servlet中调用ICustomerService接口中的register()方法进行注册。
+
 效果图如下：
       图1
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/register.png)
       图2
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/register1.png)
+      
 1.1.1.2登陆
 在login.jsp页面上用户可以输入用户名和密码进行登陆，如果用户名和密码都正确，则登陆成功跳转到index.jsp。如果不正确，需要提示用户并且还是跳转到login.jsp页面继续登陆。
 
 具体登陆过程：
+
 1．查看登陆的用户名是否存在
 2．查看密码是否正确
 		
 具体步骤：1. 实现CustomerDao接口中的findByName()方法
  2．实现ICustomerService接口中的业务逻辑login()方法
-4．创建LoginServlet.java，在该Servlet中调用ICustomerService接口中的login()方法进行登陆。
-5. 从application中取出所有的Book在index.jsp中显示
+3．创建LoginServlet.java，在该Servlet中调用ICustomerService接口中的login()方法进行登陆。
+4. 从application中取出所有的Book在index.jsp中显示
       效果图如下：
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/login.png)
   登录成功效果图：
@@ -35,6 +42,7 @@
      效果图如下：
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/bookinfo.png)
 1.1.1.3购物车
+
 1．增加订单明细line
 在index.jsp页面中点击添加到购物车按钮后往购物车(ShoppingCart.java)中增加一个line.（自己也可以添加一列，表示购买数量）
 
@@ -98,9 +106,10 @@
 3．查询订单明细
 在Orderlist.jsp页面上点击明细按钮可以查看一个订单的明细信息。
 
-具体步骤：1) 实现OrderDao接口中的findById()接口方法
+具体步骤：
+        1) 实现OrderDao接口中的findById()接口方法
 
-	 2) 实现IOrderService接口中的业务接口方法findById()方法
+	2) 实现IOrderService接口中的业务接口方法findById()方法
 	 
 	3) 创建OrderinfoServlet.java
 	
