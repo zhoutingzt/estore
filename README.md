@@ -3,19 +3,21 @@
 1.1.1ESTORE部分功能分析
 1.1.1.1注册
  	在register.jsp页面注册一个新用户，用户名作为以后登陆唯一标识。当注册成功的话，跳转到login.jsp页面
-详细描述：1．需要判断注册的用户名是否已经在数据库中存在。
-		  2．最后将注册信息保存到Customer表
+详细描述:
+1．需要判断注册的用户名是否已经在数据库中存在。
+2．最后将注册信息保存到Customer表
 
 具体步骤：1. 实现CustomerDao接口中的saveCustomer()方法
-		  2．实现ICustomerService接口中的业务逻辑register()方法
-		  4．创建RegisterServlet.java，在该Servlet中调用ICustomerService接口中的register()方法进行注册。
-      效果图如下：
+         2．实现ICustomerService接口中的业务逻辑register()方法
+        4．创建RegisterServlet.java，在该Servlet中调用ICustomerService接口中的register()方法进行注册。
+效果图如下：
       图1
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/register.png)
       图2
-      ![image](https://github.com/zhoutingzt/estore/blob/master/images/register2.png)
+      ![image](https://github.com/zhoutingzt/estore/blob/master/images/register1.png)
 1.1.1.2登陆
 在login.jsp页面上用户可以输入用户名和密码进行登陆，如果用户名和密码都正确，则登陆成功跳转到index.jsp。如果不正确，需要提示用户并且还是跳转到login.jsp页面继续登陆。
+
 具体登陆过程：
 1．查看登陆的用户名是否存在
 2．查看密码是否正确
@@ -64,7 +66,7 @@
 		  3) 修改成功后跳转到shopcar.jsp页面
  效果图如下：
       ![image](https://github.com/zhoutingzt/estore/blob/master/images/modifyhopchart.png)
-3．删除line
+
 5．清空购物车
 在shopcar.jsp页面中点击清空购物车后可以删除购物车中所有的line。
 
